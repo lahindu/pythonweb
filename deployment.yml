@@ -22,7 +22,7 @@ spec:
       - name: webapp
         image: 10.0.0.50:5000/webapp:v1
         ports:
-        - containerPort: 9090
+        - containerPort: 8080
           name: http
 ---
 apiVersion: v1
