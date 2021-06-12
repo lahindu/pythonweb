@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: 44.235.139.114:8082/webapp:v1
+        image: 10.0.0.50:5000/webapp:v1
         ports:
         - containerPort: 9090
           name: http
@@ -37,9 +37,9 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 8080
+      port: 80
       protocol: TCP
       targetPort: 8080
   selector:
     k8s-app: webapp
-  type: "ClusterIP"
+  type: LoadBalancer
