@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+  namespace: dev
+  labels: 
+    k8s-app: webapp
+  annotations:
+    prometheus.io/scrape: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: webapp
+  template:
+    metadata:
+      labels:
+        k8s-app: webapp
+    spec:
+      containers:
+      - name: webapp
+        image: 44.235.139.114:8082/webapp:v1
+        ports:
+        - containerPort: 9090
+          name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp
+  namespace: dev
+  labels:
+    k8s-app: webapp
+  annotations:
+    prometheus.io/scrape: 'true'
+spec:
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    k8s-app: webapp
+  type: "ClusterIP"
